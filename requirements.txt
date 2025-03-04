@@ -1,0 +1,6 @@
+flask
+flask_SQLAlchemy
+flask_restful
+flask_migrate
+flask_login
+flask_jwt_extended
