@@ -12,13 +12,15 @@ class Users(UserMixin, db.Model):
     email:Mapped[str] = mapped_column(String(100), unique=True)
     password:Mapped[str] = mapped_column(String(100))
 
-    def __init__(self, email, name, password):
-        self.email = email
+    attendances = relationship('Attendance', back_populates='user')
+
+    def __init__(self, name, email):
         self.name = name
-        self.password = password
+        self.email = email
 
 
 class Attendance(UserMixin, db.Model):
+    __tablename__ = 'attendance'
     id:Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     user_id:Mapped[int] = mapped_column(Integer, ForeignKey('users.id'))
     timestamp:Mapped[DateTime] = mapped_column(DateTime(timezone=True), server_default=func.now())
